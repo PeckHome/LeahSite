@@ -1,0 +1,91 @@
+trigger:
+  branches:
+    include:
+    - master
+
+pool:
+  name: 'Default'
+  vmImage: 'ubuntu-latest'
+
+variables:
+  containerRegistry: 'peckma'
+  imageName: 'dashboard'
+  uniqueTag: $(Build.BuildId)
+
+stages:
+- stage: Build
+  displayName: 'Build and push Docker image'
+  jobs:
+  - job: Build
+    displayName: 'Build'
+    pool:
+      name: 'Default'
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: '$(containerRegistry)/$(imageName)'
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+        arguments: '--no-cache'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: '$(containerRegistry)/$(imageName)'
+        command: 'push'
+        tags: |
+          $(Build.BuildId)
+
+- stage: DeployToKubernetes
+  jobs:
+  - job: DeployJob
+    steps:
+    - script: |
+        echo apiVersion: apps/v1 > temp-deployment.yaml
+        echo kind: Deployment >> temp-deployment.yaml
+        echo metadata: >> temp-deployment.yaml
+        echo   name: nginx-deployment >> temp-deployment.yaml
+        echo   labels: >> temp-deployment.yaml
+        echo     app: nginx >> temp-deployment.yaml
+        echo spec: >> temp-deployment.yaml
+        echo   replicas: 1 >> temp-deployment.yaml
+        echo   selector: >> temp-deployment.yaml
+        echo     matchLabels: >> temp-deployment.yaml
+        echo       app: nginx >> temp-deployment.yaml
+        echo   template: >> temp-deployment.yaml
+        echo     metadata: >> temp-deployment.yaml
+        echo       labels: >> temp-deployment.yaml
+        echo         app: nginx >> temp-deployment.yaml
+        echo     spec: >> temp-deployment.yaml
+        echo       containers: >> temp-deployment.yaml
+        echo       - name: webtest >> temp-deployment.yaml
+        echo         image: peckma/oneswoop:$(Build.BuildId) >> temp-deployment.yaml
+        echo         ports: >> temp-deployment.yaml
+        echo         - containerPort: 80 >> temp-deployment.yaml
+        echo --- >> temp-deployment.yaml
+        echo apiVersion: v1 >> temp-deployment.yaml
+        echo kind: Service >> temp-deployment.yaml
+        echo metadata: >> temp-deployment.yaml
+        echo   name: nginx-service >> temp-deployment.yaml
+        echo   labels: >> temp-deployment.yaml
+        echo     app: nginx >> temp-deployment.yaml
+        echo spec: >> temp-deployment.yaml
+        echo   type: NodePort >> temp-deployment.yaml
+        echo   ports: >> temp-deployment.yaml
+        echo   - port: 80 >> temp-deployment.yaml
+        echo     targetPort: 80 >> temp-deployment.yaml
+        echo     nodePort: 30080 >> temp-deployment.yaml
+        echo   selector: >> temp-deployment.yaml
+        echo     app: nginx >> temp-deployment.yaml
+      displayName: 'Generate Inline K8s Config'
+
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'HomeKube'
+        command: 'apply'
+        useConfigurationFile: true
+        configuration: 'temp-deployment.yaml'
