@@ -41,7 +41,7 @@ main {
     min-height: 100vh;
     min-height: calc(100vh - headers height);
     padding: 20px;
-    background-image: url('backgroundimages/Main\ Background.jpg');
+    background-image: url('backgroundimages/MainBackground.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
