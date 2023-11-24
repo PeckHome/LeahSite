@@ -1,0 +1,97 @@
+/* Reset some basic elements */
+body, h1, a {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+section {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center children vertically */
+    flex-direction: column; /* Stack children vertically */
+    background-color: #e9e9e9;
+    margin-bottom: 1em;
+    padding: 1.5em;
+    border-radius: 10px;
+    width: 100%; /* Full width */
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+
+main {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    min-height: calc(100vh - headers height);
+    padding: 20px;
+    background-image: url('backgroundimages/Main\ Background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.button-container {
+    max-width: 1000px;
+    background-color: #535252e0;
+    padding: 2em;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.button {
+    display: inline-block;
+    width: 250px;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    font-size: 1.5em;
+    text-decoration: none;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
+    margin-bottom: 20px; /* Add some space between the rows */
+
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+/* Add specific styles for each button if needed */
+.button:nth-child(1) {
+    background-color: #e74c3c;
+}
+
+.button:nth-child(2) {
+    background-color: #3498db;
+}
+
+.button:nth-child(3) {
+    background-color: #2ecc71;
+}
+
