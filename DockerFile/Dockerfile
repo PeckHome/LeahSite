@@ -14,3 +14,4 @@ COPY MainBackground.png /usr/share/nginx/html/backgroundimages
 COPY devops.png /usr/share/nginx/html/backgroundimages
 COPY kuma.png /usr/share/nginx/html/backgroundimages
 COPY trudesk.png /usr/share/nginx/html/backgroundimages
+COPY wordpress.png /usr/share/nginx/html/backgroundimages
