@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webtest
-        image: peckma/oneswoop:latest
+        image: peckma/dashboard:latest
         ports:
         - containerPort: 80
 ---
