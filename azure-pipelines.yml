@@ -9,7 +9,7 @@ pool:
 
 variables:
   containerRegistry: 'peckma'
-  imageName: 'dashboard'
+  imageName: 'leah'
   uniqueTag: $(Build.BuildId)
 
 stages:
@@ -62,7 +62,7 @@ stages:
         echo     spec: >> temp-deployment.yaml
         echo       containers: >> temp-deployment.yaml
         echo       - name: webtest >> temp-deployment.yaml
-        echo         image: peckma/dashboard:$(Build.BuildId) >> temp-deployment.yaml
+        echo         image: peckma/leah:$(Build.BuildId) >> temp-deployment.yaml
         echo         ports: >> temp-deployment.yaml
         echo         - containerPort: 80 >> temp-deployment.yaml
         echo --- >> temp-deployment.yaml
