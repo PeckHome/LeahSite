@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webtest
-        image: peckma/dashboard:latest
+        image: peckma/leah:latest
         ports:
         - containerPort: 80
 ---
@@ -31,6 +31,6 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-    nodePort: 30080
+    nodePort: 30090
   selector:
     app: nginx
