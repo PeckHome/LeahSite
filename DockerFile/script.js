@@ -1,6 +1,7 @@
-var messages = ["Leah Hope Norton", "You are the most beautiful", "Sweet", "Kind", "Understanding", "Amazing woman in the world", "You mean the world to me", "I love You",
- "You're the only woman that showed me what it actually means to love someone.", "You're a woman that makes me want to be a better man.", "You've showed me god, you've showed me open mindedness, you've helped guide me toward light.",
-"You're the most beautiful, sexy, and cute woman alive and I'm all yours.", "With much Love: Maverick Peck", "Us.jpg"];
+var messages = ["Leah Hope Norton","I have been truly blessed with you being in my life.", "You're the most cute, beautiful, sexy woman alive", "You make me want to be a better man... to improve myself",
+"And most importantly, you've pointed me toward God, you've helped me grow in my faith, and for that I'm forever thankful", "Call it controversial", "But I love you...", "and I'm excited to see where the future takes us",
+"Thank You for being in my life", "With much Love: Maverick Peck", "Us.jpg"];
+
 var index = 0;
 var messageDiv = document.getElementById('message');
 
